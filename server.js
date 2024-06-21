@@ -1,11 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const {connection} = require('./config/db');
+const {connection, dbConnection} = require('./config/db');
 const bodyParser = require('body-parser');
 const hiraganaRoutes = require('./routes/hiraganaRoutes')
+const cardsRoutes = require('./routes/cardsRoutes')
 require ('dotenv').config();
 
 const app = express();
+
+dbConnection();
+
 app.use(cors());
 
 // Configuración body-parser
@@ -23,6 +27,7 @@ connection.connect((err) => {
 
 
 app.use('/hiragana', hiraganaRoutes)
+app.use('/myCards', cardsRoutes)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
