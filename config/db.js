@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require ('dotenv').config();
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: process.env.HOST,
   user: 'root',
   password: process.env.PASSWORD,
   database: 'flashcards'
