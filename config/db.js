@@ -1,12 +1,10 @@
-const mysql = require('mysql2');
+const {createClient} = require('@libsql/client')
 const mongoose = require('mongoose');
 require ('dotenv').config();
 
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  user: 'root',
-  password: process.env.PASSWORD,
-  database: 'flashcards'
+const turso = createClient({
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
 const dbConnection = async() => {
@@ -19,4 +17,4 @@ const dbConnection = async() => {
   }
 };
 
-module.exports = {connection, dbConnection};
+module.exports = {turso, dbConnection};

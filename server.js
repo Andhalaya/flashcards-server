@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const {connection, dbConnection} = require('./config/db');
+const {dbConnection} = require('./config/db');
 const bodyParser = require('body-parser');
 const hiraganaRoutes = require('./routes/hiraganaRoutes')
 const cardsRoutes = require('./routes/cardsRoutes')
@@ -15,15 +15,6 @@ app.use(cors());
 // Configuración body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to the MySQL database.');
-});
 
 
 app.use('/hiragana', hiraganaRoutes)
